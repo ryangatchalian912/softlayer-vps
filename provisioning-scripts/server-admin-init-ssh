@@ -1,0 +1,28 @@
+#!/bin/bash
+# Title:       Server Admin SSH Initialization Script
+# Description: This script initializes the server admin user account for SSH.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-16
+# Version:     1.0
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Login as server admin user
+echo 'Login as server admin user...'
+server_admin_username=$1
+su - $server_admin_username
+
+# STEP 2: Create .ssh directory
+if [ ! -d "/home/$server_admin_username/.ssh" ]
+then
+    echo 'Creating .ssh directory...'
+    cd /home/$server_admin_username
+    mkdir .ssh
+fi
+
+# STEP 3: Create authorized key files
+echo 'Creating authorized key files...'
+touch .ssh/authorized_keys
+touch .ssh/authorized_keys2
+
+##### END SCRIPT #####

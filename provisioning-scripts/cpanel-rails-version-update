@@ -1,0 +1,26 @@
+#!/bin/bash
+# Title:       cPanel Rails Version Update Script
+# Description: This script updates the Rails version used by cPanel when creating RoR apps.
+#              The cPanel installed copies using /scripts/installruby are older versions and
+#              the Ruby versions before 1.9 do not support Rails 4.
+# Author:      Ryan Gatchalian
+# Date:        2015-May-29
+# Version:     1.0
+
+##### CONSTANTS #####
+RAILS_OLD_VERSION=2.3.18
+RAILS_NEW_VERSION=4.2.3
+RAILS_CPANEL_MODULE_FILE=/usr/local/cpanel/Cpanel/RoR.pm
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Backup cPanel Rails module file (just in case something fails)
+echo "Backing up $RAILS_CPANEL_MODULE_FILE (just in case something fails)..."
+cp $RAILS_CPANEL_MODULE_FILE $RAILS_CPANEL_MODULE_FILE.bak
+
+# STEP 2: Update cPanel Rails module file
+echo "Updating $RAILS_CPANEL_MODULE_FILE..."
+sed -i "s/$RAILS_OLD_VERSION/$RAILS_NEW_VERSION/g" $RAILS_CPANEL_MODULE_FILE
+replace "'--force', '.'" "'new', '.', '--force'" -- $RAILS_CPANEL_MODULE_FILE
+
+##### END SCRIPT #####

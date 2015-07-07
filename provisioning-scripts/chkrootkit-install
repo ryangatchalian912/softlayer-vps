@@ -1,0 +1,76 @@
+#!/bin/bash
+# Title:       chkrootkit Install Script
+# Description: This script installs the latest version of chkrootkit.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-09
+# Version:     1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src
+BIN_DOWNLOAD_DIR=/usr/local/bin
+CHKROOTKIT_VERSION=0.50
+CHKROOTKIT_SRC_DIR=$SRC_DOWNLOAD_DIR/chkrootkit-$CHKROOTKIT_VERSION
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Remove old chkrootkit sources
+cd $SRC_DOWNLOAD_DIR
+if [ -f "chkrootkit.tar.gz" ]
+then
+    echo 'Removing old chkrootkit sources...'
+    rm -rf chkrootkit*
+fi
+
+# STEP 2: Download chrootkit
+echo 'Downloading chkrootkit...'
+wget ftp://ftp.pangeia.com.br/pub/seg/pac/chkrootkit.tar.gz
+
+# STEP 3: Extract chkrootkit sources
+echo 'Extracting chkrootkit sources...'
+tar -xvzf chkrootkit.tar.gz
+
+# STEP 4: Install chkrootkit
+echo 'Installing chkrootkit...'
+cd $CHKROOTKIT_SRC_DIR
+make sense
+
+# STEP 5: Create symlinks for chkrootkit binaries
+echo 'Creating symlinks for chkrootkit binaries...'
+#for executable_file in `find . -maxdepth 2 -perm /a=x`
+for executable_file in `find $CHKROOTKIT_SRC_DIR -maxdepth 2 -perm /a=x`
+do
+    if [ ! -d $executable_file ]
+    then
+        # STEP 5a: Extract the filename from the path
+        filename=`basename $executable_file`
+
+        # STEP 5b: Remove previous symlink, if it already exists
+        if [ -L $BIN_DOWNLOAD_DIR/$filename ]
+        then
+            echo "Removing previous symlink for $executable_file..."
+            rm -rf $BIN_DOWNLOAD_DIR/$filename
+        fi
+
+        # STEP 5c: Create new symlink
+        echo "Creating new symlink for $executable_file..."
+        ln -sf $executable_file $BIN_DOWNLOAD_DIR/$filename
+    else
+        echo "$executable_file is a directory. Skipping..."
+    fi
+done
+
+# STEP 6: Remove chkrootkit source files
+echo 'Removing chkrootkit source files...'
+rm -rf *.c
+rm -rf *.lsm
+rm -rf Makefile
+
+# STEP 7: Remove chkrootkit source TAR file
+cd $SRC_DOWNLOAD_DIR
+if [ -f "chkrootkit.tar.gz" ]
+then
+    echo 'Removing chkrootkit source TAR file...'
+    rm -rf chkrootkit.tar.gz
+fi
+
+##### END SCRIPT #####

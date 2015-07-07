@@ -1,0 +1,73 @@
+#!/bin/bash
+# Title:       External Storage Disk Initialization Script
+# Description: This script partitions, formats, and mounts an external storage
+#              disk for use with cPanel/WHM.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-16
+# Version:     1.0
+
+##### CONSTANTS #####
+FILE_SYSTEM=ext3
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Check if the new hard drive is already added in the server
+echo 'Checking if the new hard drive is already added in the server...'
+ls -la /dev/xvd*
+echo ''
+
+# STEP 2: Check the size of the new hard drive
+echo 'Checking the size of the new hard drive...'
+fdisk -l
+echo ''
+
+# STEP 3: Select the new hard drive
+printf 'Please enter the hard drive you wish to partition: '
+read external_storage
+echo ''
+
+# STEP 4: Create a new partition on the new hard drive
+echo "Creating a new partition on /dev/$external_storage..."
+fdisk /dev/$external_storage
+echo ''
+
+# STEP 5: Check if the new partition has been created
+echo "Checking if the new partition has been created on /dev/$external_storage..."
+ls -la /dev/xvd*
+echo ''
+
+# STEP 6: Select the hard drive partition to format
+printf 'Please enter the partition you wish to format: '
+read partition
+echo ''
+
+# STEP 7: Create a new ext3 file system on the disk partition
+echo "Creating an $FILE_SYSTEM file system on /dev/$partition..."
+mkfs.$FILE_SYSTEM /dev/$partition
+echo ''
+
+# STEP 8: Before mounting the device, edit fstab manually and add the device,
+#         directory, and mention the file systems like below.
+nano /etc/fstab
+
+# STEP 9: Create a new home directory
+printf "Please type the new home directory you wish to create (prefix with a '/'): "
+read new_home_dir
+echo ''
+
+# STEP 9: Mount the new file system
+echo "Mounting /dev/$partition on $new_home_dir..."
+mkdir $new_home_dir
+mount /dev/$partition $new_home_dir
+echo ''
+
+# STEP 10: Check that the partition has been properly mounted
+echo "Checking that /dev/$partition has been properly mounted on $new_home_dir..."
+df -h
+echo ''
+
+# STEP 10: Initialize Rootkit Hunter database
+echo 'Rebooting the server...'
+reboot
+
+##### END SCRIPT #####

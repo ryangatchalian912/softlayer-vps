@@ -1,0 +1,23 @@
+#!/bin/bash
+# Title:       Server Admin User Creation Script
+# Description: This script creates the server admin Wheel Group user account.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-15
+# Version:     1.0
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Create new user $server_admin_username
+server_admin_username=$1
+echo "Creating new user '$server_admin_username'..."
+useradd $server_admin_username
+
+# STEP 2: Set new password for user $server_admin_username
+echo "Setting new password for user '$server_admin_username'..."
+passwd $server_admin_username
+
+# STEP 3: Add user $server_admin_username to the Wheel Users group
+echo "Adding user '$server_admin_username' to the Wheel Users group..."
+usermod -G wheel $server_admin_username
+
+##### END SCRIPT #####

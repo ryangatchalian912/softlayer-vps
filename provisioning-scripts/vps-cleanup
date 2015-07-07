@@ -1,0 +1,122 @@
+#!/bin/bash
+# Title:       VPS Cleanup Script
+# Description: This script cleans up the /tmp directory. In addition, it
+#              also removes old cPanel backups, cPanel updates, and temporary
+#              files. It also empties log files that take up too much space.
+# Author:      Ryan Gatchalian
+# Date:        2015-May-27
+# Version:     1.0
+
+##### CONSTANTS #####
+CPANEL_BACKUP_DIR=/backup/cpbackup
+CPANEL_DAILY_BACKUP_DIR=$CPANEL_BACKUP_DIR/daily
+USER_LOCAL_DIR=/usr/local
+USER_LOCAL_APACHE_DIR=$USER_LOCAL_DIR/apache
+USER_LOCAL_APACHE_LOGS_DIR=$USER_LOCAL_APACHE_DIR/logs
+USER_LOCAL_APACHE_DOM_LOGS_DIR=$USER_LOCAL_APACHE_DIR/domlogs
+USER_LOCAL_CPANEL_DIR=$USER_LOCAL_DIR/cpanel
+USER_LOCAL_CPANEL_LOGS_DIR=$USER_LOCAL_CPANEL_DIR/logs
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Cleanup /tmp folder
+echo 'Cleaning up /tmp folder...'
+cd /tmp
+find . -type f -exec rm -rf {} \;
+
+# STEP 2:  Cleanup user logs
+# STEP 2a: Apache logs
+echo 'Cleaning up Apache logs...'
+cd $USER_LOCAL_APACHE_LOGS_DIR
+#ls -alhS
+: > modsec_audit.log
+: > error_log
+: > suphp_log
+: > suexec_log
+: > access_log
+: > mod_jk.log
+: > jk-runtime-status.15059
+: > jk-runtime-status.15059.lock
+: > suexec_log.offset
+: > httpd.pid
+
+# STEP 2b: Apache DOM logs
+echo 'Cleaning up Apache DOM logs...'
+cd $USER_LOCAL_APACHE_DOM_LOGS_DIR
+#ls -alhS
+#: > [log-file]
+
+# STEP 2c: cPanel logs
+echo 'Cleaning up cPanel logs...'
+cd $USER_LOCAL_CPANEL_LOGS_DIR
+#ls -alhS
+: > access_log
+: > access_logs
+: > login_log
+: > login_logs
+: > tailwatchd_log
+: > error_log
+: > safeapacherestart_log
+: > licenses_log
+: > build_locale_databases_log
+: > stats_log
+: > session_log
+: > cpwrapd_log
+: > queueprocd_log
+: > cpdavd_error_log
+: > cpdavd_session_log
+: > cphulkd.log
+: > cphulkd_errors.log
+: > dnsadmin_log
+: > panic_log
+
+# STEP 2d: /var/log
+echo 'Cleaning up /var/log logs...'
+cd /var/log
+#ls -alhS
+#: > exim_mainlog
+
+# STEP 3: Remove cPanel backups for terminated users
+if [ -d "$CPANEL_DAILY_BACKUP_DIR" ]
+then
+    echo 'Removing cPanel backups for terminated users...'
+    cd $CPANEL_DAILY_BACKUP_DIR
+    for user in *
+    do
+        if [ -f /var/cpanel/users/$user ]
+        then
+            echo "'$user' is a valid cPanel user. Associated backups have not been removed."
+        else
+            rm -rf $CPANEL_BACKUP_DIR/*/$user/
+        fi
+    done
+fi
+
+# STEP 4: Remove user cPanel and Fantastico backups
+echo 'Removing cPanel user backups...'
+for user in `/bin/ls -A /var/cpanel/users`
+do
+    rm -rf /home/$user/backup-*$user.tar.gz
+done
+
+echo 'Removing up Fantastico backups...'
+rm -rf /home/*/fantastico_backups
+
+# STEP 5: Remove cPanel File Manager temp files
+echo 'Removing cPanel File Manager temp files...'
+rm -rf /home/*/tmp/Cpanel_*
+
+# STEP 6: Remove cPanel update archives
+echo 'Removing cPanel update archives...'
+rm -rf $USER_LOCAL_DIR/apache.backup*
+rm -rf /home/cpeasyapache
+
+# STEP 7: Clean up Yum files
+echo 'Cleaning up Yum files...'
+yum clean all
+
+# STEP 8: Remove pure-ftp partials
+echo 'Removing pure-ftp partials...'
+locate .pureftpd-upload | xargs rm -rf
+
+##### END SCRIPT #####

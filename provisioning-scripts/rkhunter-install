@@ -1,0 +1,49 @@
+#!/bin/bash
+# Title:       Rootkit Hunter Install Script
+# Description: This script installs the latest version of Rootkit Hunter.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-16
+# Version:     1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src
+RKHUNTER_VERSION=1.4.2
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Remove old Rootkit Hunter installer files
+echo 'Removing old Rootkit Hunter installer files...'
+cd $SRC_DOWNLOAD_DIR
+rm -rf $SRC_DOWNLOAD_DIR/rkhunter*
+
+# STEP 2: Download Rootkit Hunter
+echo 'Downloading Rootkit Hunter...'
+wget http://dfn.dl.sourceforge.net/sourceforge/rkhunter/rkhunter-$RKHUNTER_VERSION.tar.gz
+wget http://dfn.dl.sourceforge.net/sourceforge/rkhunter/rkhunter-$RKHUNTER_VERSION.tar.gz.sha1.txt
+
+# STEP 3: Verify the integrity of the Rootkit Hunter installer
+echo 'Verifying the integrity of the Rootkit Hunter installer...'
+sha1sum -c rkhunter-$RKHUNTER_VERSION.tar.gz.sha1.txt
+
+# STEP 4: Extract Rootkit Hunter
+echo 'Extracting Rootkit Hunter...'
+tar -zxvf rkhunter-$RKHUNTER_VERSION.tar.gz
+
+# STEP 5: Install Rootkit Hunter
+echo 'Installing Rootkit Hunter...'
+cd rkhunter-$RKHUNTER_VERSION
+./installer.sh --layout default --install 
+
+# STEP 6: Update Rootkit Hunter database
+echo 'Update Rootkit Hunter database...'
+rkhunter --update
+
+# STEP 7: Initialize Rootkit Hunter database
+echo 'Initializing Rootkit Hunter database...'
+rkhunter --propupd
+
+# STEP 8: Remove Rootkit Hunter installer files
+echo 'Removing Rootkit Hunter installer files...'
+rm -rf $SRC_DOWNLOAD_DIR/rkhunter*
+
+##### END SCRIPT #####

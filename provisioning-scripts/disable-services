@@ -1,0 +1,26 @@
+#!/bin/bash
+# Title:       Server Services Disable Script
+# Description: This script disables unnecessary services as recommended by
+#              ConfigServer Firewall (CSF).
+# Author:      Ryan Gatchalian
+# Date:        2015-June-15
+# Version:     1.0
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Disable nfslock service
+echo 'Disabling nfslock service...'
+service nfslock stop
+chkconfig nfslock off
+
+# STEP 2: Disable portreserve service
+echo 'Disabling portreserve service...'
+service portreserve stop
+chkconfig portreserve off
+
+# STEP 3: Disable rpcbind service
+echo 'Disabling rpcbind service...'
+service rpcbind stop
+chkconfig rpcbind off
+
+##### END SCRIPT #####

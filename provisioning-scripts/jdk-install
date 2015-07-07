@@ -1,0 +1,37 @@
+#!/bin/bash
+# Title:       Java 2 SE Install Script
+# Description: This script installs the latest version of Java 2 SE.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-16
+# Version:     1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src/java
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Create Java RPM download destination
+echo 'Creating Java RPM download destination...'
+mkdir $SRC_DOWNLOAD_DIR
+
+# STEP 2: Download Java 8 RPM package
+echo 'Downloading Java 8 RPM package...'
+cd $SRC_DOWNLOAD_DIR
+wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm" -O "jdk-8u45-linux-x64.rpm"
+
+# STEP 3: Install Java 8 RPM package
+echo 'Installing Java 2 SE - JDK 8 Release 8u45 via RPM...'
+rpm -ivh jdk-8u45-linux-x64.rpm
+
+# STEP 4: Verify Java 8 installation
+echo 'Verifying Java 8 installation...'
+java -version
+which java
+rpm -q --whatprovides java
+alternatives --display java
+
+# STEP 5: Remove Java 8 RPM package to free up space
+echo 'Removing Java 8 RPM package to free up space...'
+rm -rf jdk-8u45-linux-x64.rpm
+
+##### END SCRIPT #####

@@ -1,0 +1,47 @@
+#!/bin/bash
+# Title:       YUI Compressor Download Script
+# Description: This script downloads the latest version of the YUI Compressor
+#              from the official GitHub repository.
+# Author:      Ryan Gatchalian
+# Date:        2015-May-27
+# Version:     1.0
+
+##### CONSTANTS #####
+YUI_COMPRESSOR_VERSION=2.4.8
+USER_LIB_DIR=/usr/local/lib
+
+##### FUNCTIONS #####
+download_yui_compressor()
+{
+    # STEP 1: Go into the $USER_LIB_DIR directory
+    echo "Going into the $USER_LIB_DIR directory..."
+    cd $USER_LIB_DIR
+
+    # STEP 2: Download YUI Compressor
+    echo 'Downloading YUI Compressor...'
+    wget https://github.com/yui/yuicompressor/releases/download/v$YUI_COMPRESSOR_VERSION/yuicompressor-$YUI_COMPRESSOR_VERSION.jar -O yuicompressor-$YUI_COMPRESSOR_VERSION.jar
+}
+
+##### BEGIN SCRIPT #####
+
+if [ -d "$USER_LIB_DIR" ]
+then
+    # Control will enter here if $USER_LIB_DIR exists
+    echo "Directory $USER_LIB_DIR already exists."
+
+    # STEP 1: Remove previous versions of YUI Compressor
+    echo 'Removing previous versions of YUI Compressor...'
+    rm -rf $USER_LIB_DIR/yuicompressor-*
+
+    # STEP 2: Download YUI Compressor
+    download_yui_compressor
+else
+    # STEP 1: Create $USER_LIB_DIR directory
+    echo "Creating $USER_LIB_DIR directory..."
+    mkdir $USER_LIB_DIR
+
+    # STEP 2: Download YUI Compressor
+    download_yui_compressor
+fi
+
+##### END SCRIPT #####

@@ -1,0 +1,18 @@
+#!/bin/bash
+# Title:       Kernel Update Script
+# Description: This script updates the current CentOS Linux kernel.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-17
+# Version:     1.0
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Update Linux kernel
+echo 'Updating Linux kernel...'
+yum update
+
+# STEP 2: Perform a graceful reboot
+echo 'Rebooting...'
+reboot
+
+##### END SCRIPT #####

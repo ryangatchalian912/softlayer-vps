@@ -1,0 +1,82 @@
+#!/bin/bash
+# Title:       Server Post-Provisioning Script
+# Description: This script provisions the server for optimal performance and security.
+#              This script also launches the other installation scripts for additional
+#              software and plugins.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-16
+# Version:     1.0
+
+##### CONSTANTS #####
+VPS_SCRIPTS_DIR=/usr/local/sbin
+SERVER_ADMIN_USERNAME=web_server_admin
+SERVER_ADMIN_EMAIL=admin@example.com
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Create server admin user
+cd $VPS_SCRIPTS_DIR
+server-admin-create-user $SERVER_ADMIN_USERNAME
+echo ''
+
+# STEP 2: Initialize server admin user for SSH use
+cd $VPS_SCRIPTS_DIR
+server-admin-init-ssh $SERVER_ADMIN_USERNAME
+echo ''
+
+# STEP 3: Install Clean Backups WHM Plugin
+cd $VPS_SCRIPTS_DIR
+cleanbackups-install
+echo ''
+
+# STEP 4: Install ConfigServer Firewall
+cd $VPS_SCRIPTS_DIR
+csf-install
+echo ''
+
+# STEP 5: Disable unnecessary services
+cd $VPS_SCRIPTS_DIR
+disable-services
+echo ''
+
+# STEP 6: Install chkrootkit
+cd $VPS_SCRIPTS_DIR
+chkrootkit-install
+echo ''
+
+# STEP 7: Install Rootkit Hunter
+cd $VPS_SCRIPTS_DIR
+rkhunter-install
+echo ''
+
+# STEP 8: Perform initial server cleanup
+cd $VPS_SCRIPTS_DIR
+vps-cleanup
+echo ''
+
+# STEP 9: Install Ruby on Rails
+cd $VPS_SCRIPTS_DIR
+ruby-install
+echo ''
+
+# STEP 10: Install Java 2 SE
+cd $VPS_SCRIPTS_DIR
+jdk-install
+echo ''
+
+# STEP 11: Install YUI Compressor
+cd $VPS_SCRIPTS_DIR
+yui-compressor-install
+echo ''
+
+# STEP 12: Perform server cleanup one last time
+cd $VPS_SCRIPTS_DIR
+vps-cleanup
+echo ''
+
+# STEP 13: Create custom system file filter
+cd $VPS_SCRIPTS_DIR
+touch /etc/antivirus.empty
+echo ''
+
+##### END SCRIPT #####

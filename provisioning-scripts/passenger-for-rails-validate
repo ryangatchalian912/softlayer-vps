@@ -1,0 +1,17 @@
+#!/bin/bash
+# Title:       Phusion Passenger for Rails Validation Script
+# Description: This script validates the Phusion Passenger for Rails installation.
+# Author:      Ryan Gatchalian
+# Date:        2015-July-07
+# Version:     1.0
+
+##### CONSTANTS #####
+CPANEL_APACHE_APXS_PATH=/usr/local/apache/bin/apxs
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Validate the Phusion Passenger for Rails installation
+echo 'Validating the Phusion Passenger for Rails installation...'
+passenger-config validate-install --apxs-path $CPANEL_APACHE_APXS_PATH
+
+##### END SCRIPT #####

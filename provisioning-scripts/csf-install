@@ -1,0 +1,36 @@
+#!/bin/bash
+# Title:       ConfigServer Firewall Install Script
+# Description: This script installs the latest version of ConfigServer Firewall.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-15
+# Version:     1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Remove old ConfigServer Firewall sources
+echo 'Removing old ConfigServer Firewall sources...'
+cd $SRC_DOWNLOAD_DIR
+rm -rf $SRC_DOWNLOAD_DIR/csf*
+
+# STEP 2: Download ConfigServer Firewall
+echo 'Downloading ConfigServer Firewall...'
+wget http://www.configserver.com/free/csf.tgz
+
+# STEP 3: Extract ConfigServer Firewall
+echo 'Extracting ConfigServer Firewall...'
+tar -xzf csf.tgz
+
+# STEP 4: Install ConfigServer Firewall
+echo 'Installing ConfigServer Firewall...'
+cd csf
+sh install.sh
+
+# STEP 5: Remove ConfigServer Firewall installer files
+echo 'Removing ConfigServer Firewall installer files...'
+cd ..
+rm -rf $SRC_DOWNLOAD_DIR/csf*
+
+##### END SCRIPT #####

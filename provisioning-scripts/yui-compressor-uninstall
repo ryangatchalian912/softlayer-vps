@@ -1,0 +1,23 @@
+#!/bin/bash
+# Title:       YUI Compressor Uninstall Script
+# Description: This script uninstalls all existing YUI Compressor installations.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-16
+# Version:     1.0
+
+##### CONSTANTS #####
+USER_LIB_DIR=/usr/local/lib
+
+##### BEGIN SCRIPT #####
+
+if [ -d "$USER_LIB_DIR" ]
+then
+    # Control will enter here if $USER_LIB_DIR exists
+    echo "Directory $USER_LIB_DIR already exists."
+
+    # STEP 1: Remove all existing YUI Compressor installations
+    echo 'Removing all existing YUI Compressor installations...'
+    rm -rf $USER_LIB_DIR/yuicompressor-*
+fi
+
+##### END SCRIPT #####

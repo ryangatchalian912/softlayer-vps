@@ -1,0 +1,31 @@
+#!/bin/bash
+# Title:       Node.js Install Script
+# Description: This script installs the latest version of Node.js.
+# Author:      Ryan Gatchalian
+# Date:        2015-May-27
+# Version:     1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Download Node.js
+echo 'Downloading the latest distribution of Node.js...'
+cd $SRC_DOWNLOAD_DIR
+wget http://nodejs.org/dist/node-latest.tar.gz
+
+# STEP 2: Extract Node.js
+echo 'Extracting Node.js...'
+tar zxvf node-latest.tar.gz
+
+# STEP 3: Configure Node.js
+echo 'Configuring Node.js...'
+cd node-v*
+./configure
+
+# STEP 4: Compile and install Node.js
+echo 'Compiling and installing Node.js...'
+make && make install
+
+##### END SCRIPT #####

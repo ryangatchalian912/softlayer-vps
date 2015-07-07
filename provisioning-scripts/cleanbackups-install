@@ -1,0 +1,32 @@
+#!/bin/bash
+# Title:       Clean Backups WHM Plugin Install Script
+# Description: This script installs the latest version of Clean Backups WHM Plugin.
+# Author:      Ryan Gatchalian
+# Date:        2015-June-15
+# Version:     1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Remove old Clean Backups WHM Plugin installer files
+echo 'Removing Clean Backups WHM Plugin installer files...'
+cd $SRC_DOWNLOAD_DIR
+rm -rf installd-cleanbackups
+rm -rf latest-cleanbackups
+
+# STEP 2: Download Clean Backups WHM Plugin
+echo 'Downloading Clean Backups WHM Plugin...'
+wget http://download.ndchost.com/cleanbackups/latest-cleanbackups
+
+# STEP 3: Install Clean Backups WHM Plugin
+echo 'Installing Clean Backups WHM Plugin...'
+sh latest-cleanbackups
+
+# STEP 4: Remove Clean Backups WHM Plugin installer files
+echo 'Removing Clean Backups WHM Plugin installer files...'
+rm -rf installd-cleanbackups
+rm -rf latest-cleanbackups
+
+##### END SCRIPT #####

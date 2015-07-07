@@ -1,0 +1,128 @@
+#!/bin/bash
+# Title:       Ruby Install Script
+# Description: This script compiles and installs the latest Ruby on Rails for Linux servers.
+#              The cPanel installed copies using /scripts/installruby are older versions and
+#              the Ruby versions before 1.9 do not support Rails 4.
+# Author:      Ryan Gatchalian
+# Date:        2015-May-27
+# Version:     1.0
+
+##### CONSTANTS #####
+RUBY_MAJOR_VERSION=2.2
+RUBY_MINOR_VERSION=2
+RUBY_VERSION=$RUBY_MAJOR_VERSION.$RUBY_MINOR_VERSION
+RUBYGEMS_VERSION=2.4.7
+SRC_DOWNLOAD_DIR=/usr/local/src/ruby
+LIB_DOWNLOAD_DIR=/usr/local/lib/ruby
+BIN_DOWNLOAD_DIR=/usr/local/bin/ruby
+VPS_SCRIPTS_DIR=/usr/local/sbin
+CPANEL_APACHE_APXS_PATH=/usr/local/apache/bin/apxs
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Remove previous Ruby installations
+if [ -d "$SRC_DOWNLOAD_DIR" ]
+then
+    echo "Removing $SRC_DOWNLOAD_DIR directory..."
+    rm -rf $SRC_DOWNLOAD_DIR
+fi
+
+if [ -d "$LIB_DOWNLOAD_DIR" ]
+then
+    echo "Removing $LIB_DOWNLOAD_DIR directory..."
+    rm -rf $LIB_DOWNLOAD_DIR
+fi
+
+# STEP 2: Download and install Ruby
+if [ ! -d "$SRC_DOWNLOAD_DIR" ]
+then
+    # Control will enter here if $SRC_DOWNLOAD_DIR does not exist
+    # Create $SRC_DOWNLOAD_DIR directory
+    echo "Creating $SRC_DOWNLOAD_DIR directory..."
+    mkdir $SRC_DOWNLOAD_DIR
+fi
+
+echo 'Downloading Ruby...'
+cd $SRC_DOWNLOAD_DIR
+wget http://cache.ruby-lang.org/pub/ruby/$RUBY_MAJOR_VERSION/ruby-$RUBY_VERSION.tar.gz
+
+echo 'Extracting Ruby source files...'
+tar xzf ruby-$RUBY_VERSION.tar.gz
+cd ruby-$RUBY_VERSION
+
+echo 'Compiling and installing Ruby...'
+./configure
+make && make install
+
+echo 'Creating symbolic links for Ruby binaries...'
+ln -s /usr/local/bin/ruby /usr/bin/ruby
+ln -s /usr/local/lib/ruby /usr/lib/ruby
+echo ''
+
+# STEP 3: Download and install Ruby Gems
+echo 'Downloading Ruby Gems...'
+cd $SRC_DOWNLOAD_DIR
+wget http://production.cf.rubygems.org/rubygems/rubygems-$RUBYGEMS_VERSION.tgz
+
+echo 'Extracting Ruby Gems...'
+tar zxvf rubygems-$RUBYGEMS_VERSION.tgz
+cd rubygems-$RUBYGEMS_VERSION
+
+echo 'Installing Ruby Gems...'
+ruby setup.rb
+ln -s /usr/local/bin/gem /usr/bin/gem
+echo ''
+
+# STEP 4: Download and install Rails
+echo 'Downloading and installing Rails...'
+gem install rails
+ln -s /usr/local/bin/rails /usr/bin/rails
+echo ''
+
+# STEP 5: Download and install Phusion Passenger for Rails
+echo 'Downloading and installing Phusion Passenger for Rails...'
+gem install passenger
+yum -y install libcurl-devel
+#passenger-install-apache2-module
+#passenger-install-apache2-module --apxs-path "/usr/bin/apxs"
+passenger-install-apache2-module --apxs-path $CPANEL_APACHE_APXS_PATH
+echo ''
+
+# STEP 6: Download and install SQLite 3 for Rails
+echo 'Downloading and installing SQLite 3 for Rails...'
+yum -y install sqlite sqlite-devel
+gem install sqlite3
+echo ''
+
+# STEP 7: Download and install improved MySQL2 gem for Rails
+echo 'Downloading and installing improved MySQL2 gem for Rails...'
+gem install mysql2
+echo ''
+
+# STEP 8: Download and install MongoDB gems for Rails
+echo 'Downloading and installing MongoDB gems for Rails...'
+gem install mongoid
+gem install mongo_mapper
+echo ''
+
+# STEP 9: Download and install few other required Ruby Gems for Rails
+echo 'Downloading and installing few other required Ruby Gems for Rails...'
+gem install nokogiri
+gem install spring
+gem install uglifier
+gem install turbolinks
+gem install json
+gem install devise
+echo ''
+
+# STEP 10: Allow Rails 4 applications to be installed using cPanel's Ruby on Rails area
+cd $VPS_SCRIPTS_DIR
+cpanel-rails-version-update
+echo ''
+
+# STEP 11: Ensure that the cPanel Rails module file remains revised
+echo 'Ensuring that the cPanel Rails module file remains revised...'
+touch /scripts/postupcp
+chmod +x /scripts/postupcp
+
+##### END SCRIPT #####
