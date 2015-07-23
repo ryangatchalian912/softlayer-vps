@@ -7,31 +7,42 @@
 
 ##### CONSTANTS #####
 SRC_DOWNLOAD_DIR=/usr/local/src/java
+JDK_MAJOR_VERSION=8
+JDK_MINOR_VERSION=51
+JDK_VERSION=$JDK_MAJOR_VERSION'u'$JDK_MINOR_VERSION
+JDK_BUILD=16
 
 ##### BEGIN SCRIPT #####
 
-# STEP 1: Create Java RPM download destination
-echo 'Creating Java RPM download destination...'
-mkdir $SRC_DOWNLOAD_DIR
+# STEP 1: Remove previous Oracle JDK installations
+echo 'Removing previous Oracle JDK installations...'
+rm -rf /usr/java
 
-# STEP 2: Download Java 8 RPM package
+# STEP 2: Create Java RPM download destination
+if [ ! -d "$SRC_DOWNLOAD_DIR" ]
+then
+    echo 'Creating Java RPM download destination...'
+    mkdir $SRC_DOWNLOAD_DIR
+fi
+
+# STEP 3: Download Java 8 RPM package
 echo 'Downloading Java 8 RPM package...'
 cd $SRC_DOWNLOAD_DIR
-wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/8u45-b14/jdk-8u45-linux-x64.rpm" -O "jdk-8u45-linux-x64.rpm"
+wget --no-cookies --no-check-certificate --header "Cookie: oraclelicense=accept-securebackup-cookie" "http://download.oracle.com/otn-pub/java/jdk/$JDK_VERSION-b$JDK_BUILD/jdk-$JDK_VERSION-linux-x64.rpm" -O "jdk-$JDK_VERSION-linux-x64.rpm"
 
-# STEP 3: Install Java 8 RPM package
-echo 'Installing Java 2 SE - JDK 8 Release 8u45 via RPM...'
-rpm -ivh jdk-8u45-linux-x64.rpm
+# STEP 4: Install Java 8 RPM package
+echo "Installing Java 2 SE - JDK 8 Release $JDK_MINOR_VERSION via RPM..."
+rpm -ivh jdk-$JDK_VERSION-linux-x64.rpm
 
-# STEP 4: Verify Java 8 installation
+# STEP 5: Verify Java 8 installation
 echo 'Verifying Java 8 installation...'
 java -version
 which java
 rpm -q --whatprovides java
 alternatives --display java
 
-# STEP 5: Remove Java 8 RPM package to free up space
+# STEP 6: Remove Java 8 RPM package to free up space
 echo 'Removing Java 8 RPM package to free up space...'
-rm -rf jdk-8u45-linux-x64.rpm
+rm -rf jdk-$JDK_VERSION-linux-x64.rpm
 
 ##### END SCRIPT #####
