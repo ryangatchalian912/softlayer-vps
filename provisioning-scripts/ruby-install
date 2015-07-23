@@ -113,6 +113,8 @@ gem install uglifier
 gem install turbolinks
 gem install json
 gem install devise
+gem install foundation-rails
+gem install slim-rails
 echo ''
 
 # STEP 10: Allow Rails 4 applications to be installed using cPanel's Ruby on Rails area
