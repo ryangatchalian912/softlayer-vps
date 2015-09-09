@@ -1,11 +1,12 @@
 #!/bin/bash
-# Title:       Rootkit Hunter Scheduled Run Script
-# Description: This script updates and runs Rootkit Hunter on a regular
-#              basis. It also sends an email report to the web server
-#              administrator.
-# Author:      Ryan Gatchalian
-# Date:        2015-June-09
-# Version:     1.0
+# Title:        Rootkit Hunter Scheduled Run Script
+# Description:  This script updates and runs Rootkit Hunter on a regular
+#               basis. It also sends an email report to the web server
+#               administrator.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jun-09
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 WEB_SERVER_ADMIN_EMAIL=admin@example.com

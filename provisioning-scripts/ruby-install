@@ -1,17 +1,18 @@
 #!/bin/bash
-# Title:       Ruby Install Script
-# Description: This script compiles and installs the latest Ruby on Rails for Linux servers.
-#              The cPanel installed copies using /scripts/installruby are older versions and
-#              the Ruby versions before 1.9 do not support Rails 4.
-# Author:      Ryan Gatchalian
-# Date:        2015-May-27
-# Version:     1.0
+# Title:        Ruby Install Script
+# Description:  This script compiles and installs the latest Ruby on Rails for Linux servers.
+#               The cPanel installed copies using /scripts/installruby are older versions and
+#               the Ruby versions before 1.9 do not support Rails 4.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-May-27
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 RUBY_MAJOR_VERSION=2.2
-RUBY_MINOR_VERSION=2
+RUBY_MINOR_VERSION=3
 RUBY_VERSION=$RUBY_MAJOR_VERSION.$RUBY_MINOR_VERSION
-RUBYGEMS_VERSION=2.4.7
+RUBYGEMS_VERSION=2.4.8
 SRC_DOWNLOAD_DIR=/usr/local/src/ruby
 LIB_DOWNLOAD_DIR=/usr/local/lib/ruby
 BIN_DOWNLOAD_DIR=/usr/local/bin/ruby

@@ -1,0 +1,33 @@
+#!/bin/bash
+# Title:        MTR Report Scheduled Run Script
+# Description:  This script updates and runs an MTR report on a regular
+#               basis. It also sends an email report to the web server
+#               administrator.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Aug-12
+# Date Updated: 2015-Sep-09
+# Version:      1.0
+
+##### CONSTANTS #####
+#WEB_SERVER_ADMIN_EMAIL=admin@example.com
+WEB_SERVER_ADMIN_EMAIL=ryan@business-online.asia
+BOLN_PC_PUBLIC_IP_ADDRESS=119.93.183.104
+KAREN_PC_PUBLIC_IP_ADDRESS=101.191.119.196
+ASIA_SERVER_PUBLIC_IP_ADDRESS=119.81.52.10
+AUSTRALIA_SERVER_PUBLIC_IP_ADDRESS=168.1.21.149
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Run MTR report with BOLN-PC as target
+( mtr --report-cycles=100  --report $BOLN_PC_PUBLIC_IP_ADDRESS ) | mail -s 'MTR Report - BOLN-PC' $WEB_SERVER_ADMIN_EMAIL
+
+# STEP 2: Run MTR report with Karen Catchpole's PC as target
+( mtr --report-cycles=100  --report $KAREN_PC_PUBLIC_IP_ADDRESS ) | mail -s 'MTR Report - Karen-Catchpole-PC' $WEB_SERVER_ADMIN_EMAIL
+
+# STEP 3: Run MTR report with Asia server as target
+( mtr --report-cycles=100  --report $ASIA_PC_PUBLIC_IP_ADDRESS ) | mail -s 'MTR Report - Asia Server' $WEB_SERVER_ADMIN_EMAIL
+
+# STEP 4: Run MTR report with Australia server as target
+( mtr --report-cycles=100  --report $AUSTRALIA_SERVER_PUBLIC_IP_ADDRESS ) | mail -s 'MTR Report - Australia Server' $WEB_SERVER_ADMIN_EMAIL
+
+##### END SCRIPT #####

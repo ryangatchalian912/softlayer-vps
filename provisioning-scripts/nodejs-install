@@ -1,9 +1,10 @@
 #!/bin/bash
-# Title:       Node.js Install Script
-# Description: This script installs the latest version of Node.js.
-# Author:      Ryan Gatchalian
-# Date:        2015-May-27
-# Version:     1.0
+# Title:        Node.js Install Script
+# Description:  This script installs the latest version of Node.js.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-May-27
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 SRC_DOWNLOAD_DIR=/usr/local/src

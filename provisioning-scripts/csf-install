@@ -1,9 +1,10 @@
 #!/bin/bash
-# Title:       ConfigServer Firewall Install Script
-# Description: This script installs the latest version of ConfigServer Firewall.
-# Author:      Ryan Gatchalian
-# Date:        2015-June-15
-# Version:     1.0
+# Title:        ConfigServer Firewall Install Script
+# Description:  This script installs the latest version of ConfigServer Firewall.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jun-15
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 SRC_DOWNLOAD_DIR=/usr/local/src

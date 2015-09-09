@@ -1,9 +1,10 @@
 #!/bin/bash
-# Title:       Server Admin User Creation Script
-# Description: This script creates the server admin Wheel Group user account.
-# Author:      Ryan Gatchalian
-# Date:        2015-June-15
-# Version:     1.0
+# Title:        Server Admin User Creation Script
+# Description:  This script creates the server admin Wheel Group user account.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jun-15
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### BEGIN SCRIPT #####
 

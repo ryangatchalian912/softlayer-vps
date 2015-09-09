@@ -1,14 +1,15 @@
 #!/bin/bash
-# Title:       Java 2 SE Install Script
-# Description: This script installs the latest version of Java 2 SE.
-# Author:      Ryan Gatchalian
-# Date:        2015-June-16
-# Version:     1.0
+# Title:        Java 2 SE Install Script
+# Description:  This script installs the latest version of Java 2 SE.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jun-16
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 SRC_DOWNLOAD_DIR=/usr/local/src/java
 JDK_MAJOR_VERSION=8
-JDK_MINOR_VERSION=51
+JDK_MINOR_VERSION=60
 JDK_VERSION=$JDK_MAJOR_VERSION'u'$JDK_MINOR_VERSION
 JDK_BUILD=16
 

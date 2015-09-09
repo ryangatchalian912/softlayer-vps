@@ -1,0 +1,33 @@
+#!/bin/bash
+# Title:        MaxMind GeoIP Legacy Database Download/Update Script
+# Description:  This script downloads/updates the MaxMind GeoIP legacy
+#               database for use with ModSecurity.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Sep-04
+# Date Updated: 2015-Sep-09
+# Version:      1.0
+
+##### CONSTANTS #####
+DB_DOWNLOAD_DIR=/usr/share/geoip
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Create $DB_DOWNLOAD_DIR directory 
+if [ ! -d "$DB_DOWNLOAD_DIR" ]
+then
+    # Control will enter here if $DB_DOWNLOAD_DIR does not exist
+    # Create $DB_DOWNLOAD_DIR directory
+    echo "Creating $DB_DOWNLOAD_DIR directory..."
+    mkdir $DB_DOWNLOAD_DIR
+fi
+
+# STEP 2: Download the latest update of MaxMind GeoIP legacy database
+echo 'Downloading the latest update of MaxMind GeoIP legacy database...'
+cd /usr/share/geoip/
+wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
+
+# STEP 3: Extract the MaxMind GeoIP legacy database archive
+echo 'Extracting the MaxMind GeoIP legacy database archive...'
+gzip -df GeoIP.dat.gz
+
+##### END SCRIPT #####
