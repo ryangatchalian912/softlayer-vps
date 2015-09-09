@@ -1,9 +1,10 @@
 #!/bin/bash
-# Title:       Rootkit Hunter Install Script
-# Description: This script installs the latest version of Rootkit Hunter.
-# Author:      Ryan Gatchalian
-# Date:        2015-June-16
-# Version:     1.0
+# Title:        Rootkit Hunter Install Script
+# Description:  This script installs the latest version of Rootkit Hunter.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jun-16
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 SRC_DOWNLOAD_DIR=/usr/local/src

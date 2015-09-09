@@ -1,11 +1,12 @@
 #!/bin/bash
-# Title:       Server Post-Provisioning Script
-# Description: This script provisions the server for optimal performance and security.
-#              This script also launches the other installation scripts for additional
-#              software and plugins.
-# Author:      Ryan Gatchalian
-# Date:        2015-June-16
-# Version:     1.0
+# Title:        Server Post-Provisioning Script
+# Description:  This script provisions the server for optimal performance and security.
+#               This script also launches the other installation scripts for additional
+#               software and plugins.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jun-16
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 VPS_SCRIPTS_DIR=/usr/local/sbin
@@ -77,6 +78,11 @@ echo ''
 # STEP 13: Create custom system file filter
 cd $VPS_SCRIPTS_DIR
 touch /etc/antivirus.empty
+echo ''
+
+# STEP 14: Install Clean Backups WHM Plugin
+cd $VPS_SCRIPTS_DIR
+geoip-database-download
 echo ''
 
 ##### END SCRIPT #####

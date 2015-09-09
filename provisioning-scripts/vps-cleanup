@@ -1,11 +1,12 @@
 #!/bin/bash
-# Title:       VPS Cleanup Script
-# Description: This script cleans up the /tmp directory. In addition, it
-#              also removes old cPanel backups, cPanel updates, and temporary
-#              files. It also empties log files that take up too much space.
-# Author:      Ryan Gatchalian
-# Date:        2015-May-27
-# Version:     1.0
+# Title:        VPS Cleanup Script
+# Description:  This script cleans up the /tmp directory. In addition, it
+#               also removes old cPanel backups, cPanel updates, and temporary
+#               files. It also empties log files that take up too much space.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-May-27
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 CPANEL_BACKUP_DIR=/backup/cpbackup

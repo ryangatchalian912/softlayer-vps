@@ -1,10 +1,11 @@
 #!/bin/bash
-# Title:       YUI Compressor Download Script
-# Description: This script downloads the latest version of the YUI Compressor
-#              from the official GitHub repository.
-# Author:      Ryan Gatchalian
-# Date:        2015-May-27
-# Version:     1.0
+# Title:        YUI Compressor Download Script
+# Description:  This script downloads the latest version of the YUI Compressor
+#               from the official GitHub repository.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-May-27
+# Date Updated: 2015-Sep-09
+# Version:      1.0
 
 ##### CONSTANTS #####
 YUI_COMPRESSOR_VERSION=2.4.8
