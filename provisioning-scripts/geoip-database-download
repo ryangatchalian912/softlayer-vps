@@ -1,10 +1,10 @@
 #!/bin/bash
 # Title:        MaxMind GeoIP Legacy Database Download/Update Script
 # Description:  This script downloads/updates the MaxMind GeoIP legacy
-#               database for use with ModSecurity.
+#               databases for use with ModSecurity and Moodle Location.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Sep-04
-# Date Updated: 2015-Sep-09
+# Date Updated: 2015-Sep-11
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -21,13 +21,58 @@ then
     mkdir $DB_DOWNLOAD_DIR
 fi
 
-# STEP 2: Download the latest update of MaxMind GeoIP legacy database
-echo 'Downloading the latest update of MaxMind GeoIP legacy database...'
-cd /usr/share/geoip/
+# STEP 2a: Download the latest update of MaxMind GeoIP Country legacy database
+echo 'Downloading the latest update of MaxMind GeoIP Country legacy database...'
+cd $DB_DOWNLOAD_DIR
 wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCountry/GeoIP.dat.gz
 
-# STEP 3: Extract the MaxMind GeoIP legacy database archive
-echo 'Extracting the MaxMind GeoIP legacy database archive...'
+# STEP 2b: Extract the MaxMind GeoIP Country legacy database archive
+echo 'Extracting the MaxMind GeoIP Country legacy database archive...'
 gzip -df GeoIP.dat.gz
+
+# STEP 3a: Download the latest update of MaxMind GeoLite Country IPv6 legacy database
+echo 'Downloading the latest update of MaxMind GeoLite Country IPv6 legacy database...'
+cd $DB_DOWNLOAD_DIR
+wget -N http://geolite.maxmind.com/download/geoip/database/GeoIPv6.dat.gz
+
+# STEP 3b: Extract the MaxMind GeoLite Country IPv6 legacy database archive
+echo 'Extracting the MaxMind GeoLite Country IPv6 legacy database archive...'
+gzip -df GeoIPv6.dat.gz
+
+# STEP 4a: Download the latest update of MaxMind GeoLite City legacy database
+echo 'Downloading the latest update of MaxMind GeoLite City legacy database...'
+cd $DB_DOWNLOAD_DIR
+wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCity.dat.gz
+
+# STEP 4b: Extract the MaxMind GeoLite City legacy database archive
+echo 'Extracting the MaxMind GeoLite City legacy database archive...'
+gzip -df GeoLiteCity.dat.gz
+
+# STEP 5a: Download the latest update of MaxMind GeoLite City IPv6 (Beta) legacy database
+echo 'Downloading the latest update of MaxMind GeoLite City IPv6 (Beta) legacy database...'
+cd $DB_DOWNLOAD_DIR
+wget -N http://geolite.maxmind.com/download/geoip/database/GeoLiteCityv6-beta/GeoLiteCityv6.dat.gz
+
+# STEP 5b: Extract the MaxMind GeoLite City IPv6 (Beta) legacy database archive
+echo 'Extracting the MaxMind GeoLite City IPv6 (Beta) legacy database archive...'
+gzip -df GeoLiteCityv6.dat.gz
+
+# STEP 6a: Download the latest update of MaxMind GeoLite ASN legacy database
+echo 'Downloading the latest update of MaxMind GeoLite ASN legacy database...'
+cd $DB_DOWNLOAD_DIR
+wget -N http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNum.dat.gz
+
+# STEP 6b: Extract the MaxMind GeoLite ASN legacy database archive
+echo 'Extracting the MaxMind GeoLite ASN legacy database archive...'
+gzip -df GeoIPASNum.dat.gz
+
+# STEP 7a: Download the latest update of MaxMind GeoLite ASN IPv6 legacy database
+echo 'Downloading the latest update of MaxMind GeoLite ASN IPv6 legacy database...'
+cd $DB_DOWNLOAD_DIR
+wget -N http://download.maxmind.com/download/geoip/database/asnum/GeoIPASNumv6.dat.gz
+
+# STEP 7b: Extract the MaxMind GeoLite ASN IPv6 legacy database archive
+echo 'Extracting the MaxMind GeoLite ASN IPv6 legacy database archive...'
+gzip -df GeoIPASNumv6.dat.gz
 
 ##### END SCRIPT #####
