@@ -1,0 +1,23 @@
+#!/bin/bash
+# Title:        Network Tools Install Script
+# Description:  This script installs network tools for diagnostic purposes.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Oct-09
+# Date Updated: 2015-Oct-09
+# Version:      1.0
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Install telnet and telnet server
+echo 'Installing telnet and telnet server...'
+yum install telnet telnet-server -y
+
+# STEP 2: Install netcat
+echo 'Installing netcat...'
+yum install nc
+
+# STEP 3: Install nmap
+echo 'Installing nmap...'
+yum install nmap
+
+##### END SCRIPT #####

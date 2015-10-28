@@ -1,0 +1,15 @@
+#!/bin/bash
+# Title:        Composer for PHP Install Script
+# Description:  This script installs Composer for PHP.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Oct-09
+# Date Updated: 2015-Oct-09
+# Version:      1.0
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Install Composer for PHP (must be logged on as root user)
+echo 'Installing Composer for PHP...'
+curl -sS https://getcomposer.org/installer | php -d allow_url_fopen=On -- --install-dir=/usr/local/bin --filename=composer
+
+##### END SCRIPT #####

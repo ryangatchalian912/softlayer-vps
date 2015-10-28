@@ -1,0 +1,16 @@
+#!/bin/bash
+# Title:        Meteor Platform Install Script
+# Description:  This script installs Meteor Platform for
+#               developing web and mobile applications.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Oct-09
+# Date Updated: 2015-Oct-09
+# Version:      1.0
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Install Meteor Platform (must be logged on as root user)
+echo 'Installing Meteor Platform...'
+curl https://install.meteor.com/ | sh
+
+##### END SCRIPT #####
