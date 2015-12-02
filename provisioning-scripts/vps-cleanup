@@ -5,7 +5,7 @@
 #               files. It also empties log files that take up too much space.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-May-27
-# Date Updated: 2015-Sep-09
+# Date Updated: 2015-Dec-02
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -76,6 +76,10 @@ echo 'Cleaning up /var/log logs...'
 cd /var/log
 #ls -alhS
 #: > exim_mainlog
+
+# STEP 2e: cPanel error_log files
+echo 'Cleaning up cPanel error_log files...'
+find / -name error_log -exec rm {} +
 
 # STEP 3: Remove cPanel backups for terminated users
 if [ -d "$CPANEL_DAILY_BACKUP_DIR" ]
