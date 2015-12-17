@@ -1,11 +1,11 @@
 #!/bin/bash
 # Title:        chkrootkit Scheduled Run Script
-# Description:  This script updates and runs chkrootkit on a regular
-#               basis. It also sends an email report to the web server
+# Description:  This script runs chkrootkit on a regular basis.
+#               It also sends an email report to the web server
 #               administrator.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Jun-09
-# Date Updated: 2015-Sep-09
+# Date Updated: 2015-Dec-02
 # Version:      1.0
 
 ##### CONSTANTS #####

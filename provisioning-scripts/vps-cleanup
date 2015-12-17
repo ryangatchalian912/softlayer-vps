@@ -17,9 +17,11 @@ USER_LOCAL_APACHE_LOGS_DIR=$USER_LOCAL_APACHE_DIR/logs
 USER_LOCAL_APACHE_DOM_LOGS_DIR=$USER_LOCAL_APACHE_DIR/domlogs
 USER_LOCAL_CPANEL_DIR=$USER_LOCAL_DIR/cpanel
 USER_LOCAL_CPANEL_LOGS_DIR=$USER_LOCAL_CPANEL_DIR/logs
+WEB_SERVER_ADMIN_EMAIL=admin@example.com
 
 ##### BEGIN SCRIPT #####
 
+(
 # STEP 1: Cleanup /tmp folder
 echo 'Cleaning up /tmp folder...'
 cd /tmp
@@ -79,7 +81,7 @@ cd /var/log
 
 # STEP 2e: cPanel error_log files
 echo 'Cleaning up cPanel error_log files...'
-find / -name error_log -exec rm {} +
+find /home* -name error_log -exec rm {} +
 
 # STEP 3: Remove cPanel backups for terminated users
 if [ -d "$CPANEL_DAILY_BACKUP_DIR" ]
@@ -123,5 +125,6 @@ yum clean all
 # STEP 8: Remove pure-ftp partials
 echo 'Removing pure-ftp partials...'
 locate .pureftpd-upload | xargs rm -rf
+)  | mail -s 'VPS Daily Cleanup Report' $WEB_SERVER_ADMIN_EMAIL
 
 ##### END SCRIPT #####

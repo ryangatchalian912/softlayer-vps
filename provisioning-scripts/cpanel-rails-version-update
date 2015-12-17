@@ -5,12 +5,12 @@
 #               the Ruby versions before 1.9 do not support Rails 4.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-May-29
-# Date Updated: 2015-Sep-09
+# Date Updated: 2015-Nov-23
 # Version:      1.0
 
 ##### CONSTANTS #####
 RAILS_OLD_VERSION=2.3.18
-RAILS_NEW_VERSION=4.2.4
+RAILS_NEW_VERSION=4.2.5
 RAILS_CPANEL_MODULE_FILE=/usr/local/cpanel/Cpanel/RoR.pm
 
 ##### BEGIN SCRIPT #####

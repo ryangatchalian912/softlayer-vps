@@ -1,0 +1,19 @@
+#!/bin/bash
+# Title:        findbot Scheduled Run Script
+# Description:  This script runs the findbot scanner to check for spambots on a
+#               regular basis. It also sends an email report to the web server
+#               administrator.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Dec-07
+# Date Updated: 2015-Dec-07
+# Version:      1.0
+
+##### CONSTANTS #####
+WEB_SERVER_ADMIN_EMAIL=admin@example.com
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Run findbot scanner
+( findbot.pl -c /tmp/ /usr/tmp /home /home1 /var/www ) | mail -s 'findbot Weekly Scan Report' $WEB_SERVER_ADMIN_EMAIL
+
+##### END SCRIPT #####

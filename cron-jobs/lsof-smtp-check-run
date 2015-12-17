@@ -1,0 +1,19 @@
+#!/bin/bash
+# Title:        lsof Scheduled Run Script
+# Description:  This script runs the lsof command to check for open SMTP ports and
+#               services on a regular basis. It also sends an email report to the
+#               web server administrator.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Dec-02
+# Date Updated: 2015-Dec-02
+# Version:      1.0
+
+##### CONSTANTS #####
+WEB_SERVER_ADMIN_EMAIL=admin@example.com
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Run ClamAV scanner (freshclam)
+( lsof -i | grep smtp ) | mail -s 'SMTP Service Daily Scan Report' $WEB_SERVER_ADMIN_EMAIL
+
+##### END SCRIPT #####
