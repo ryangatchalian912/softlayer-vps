@@ -1,0 +1,24 @@
+#!/bin/bash
+# Title:        nmap Scheduled Run Script
+# Description:  This script runs the nmap scanner to check for open ports on a
+#               regular basis. It also sends an email report to the web server
+#               administrator.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Dec-18
+# Date Updated: 2015-Dec-18
+# Version:      1.0
+
+##### CONSTANTS #####
+WEB_SERVER_ADMIN_EMAIL=admin@example.com
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Run nmap scanner
+(
+nmap --version
+nmap localhost
+nmap 119.81.52.10
+nmap 168.1.21.149
+) | mail -s 'nmap Daily Scan Report' $WEB_SERVER_ADMIN_EMAIL
+
+##### END SCRIPT #####

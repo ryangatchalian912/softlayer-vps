@@ -4,19 +4,20 @@
 #               from the official GitHub repository.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-May-27
-# Date Updated: 2015-Sep-09
+# Date Updated: 2015-Dec-23
 # Version:      1.0
 
 ##### CONSTANTS #####
 YUI_COMPRESSOR_VERSION=2.4.8
 USER_LIB_DIR=/usr/local/lib
+YUI_COMPRESSOR_LIB_DIR=$USER_LIB_DIR/yuicompressor
 
 ##### FUNCTIONS #####
 download_yui_compressor()
 {
-    # STEP 1: Go into the $USER_LIB_DIR directory
-    echo "Going into the $USER_LIB_DIR directory..."
-    cd $USER_LIB_DIR
+    # STEP 1: Go into the $YUI_COMPRESSOR_LIB_DIR directory
+    echo "Going into the $YUI_COMPRESSOR_LIB_DIR directory..."
+    cd $YUI_COMPRESSOR_LIB_DIR
 
     # STEP 2: Download YUI Compressor
     echo 'Downloading YUI Compressor...'
@@ -34,14 +35,30 @@ then
     echo 'Removing previous versions of YUI Compressor...'
     rm -rf $USER_LIB_DIR/yuicompressor-*
 
-    # STEP 2: Download YUI Compressor
+    if [ -d "$YUI_COMPRESSOR_LIB_DIR" ]
+    then
+        # Control will enter here if $YUI_COMPRESSOR_LIB_DIR exists
+        echo "Directory $YUI_COMPRESSOR_LIB_DIR already exists."
+        echo 'Removing previous versions of YUI Compressor...'
+        rm -rf $YUI_COMPRESSOR_LIB_DIR/yuicompressor-*
+    else
+        # STEP 2: Create $YUI_COMPRESSOR_LIB_DIR directory
+        echo "Creating $YUI_COMPRESSOR_LIB_DIR directory..."
+        mkdir $YUI_COMPRESSOR_LIB_DIR
+    fi
+
+    # STEP 3: Download YUI Compressor
     download_yui_compressor
 else
     # STEP 1: Create $USER_LIB_DIR directory
     echo "Creating $USER_LIB_DIR directory..."
     mkdir $USER_LIB_DIR
 
-    # STEP 2: Download YUI Compressor
+    # STEP 2: Create $YUI_COMPRESSOR_LIB_DIR directory
+    echo "Creating $YUI_COMPRESSOR_LIB_DIR directory..."
+    mkdir $YUI_COMPRESSOR_LIB_DIR
+
+    # STEP 3: Download YUI Compressor
     download_yui_compressor
 fi
 

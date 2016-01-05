@@ -1,0 +1,36 @@
+#!/bin/bash
+# Title:        Reboot Checker rc.d Script
+# Description:  This script checks if the server was rebooted normally or not.
+#               It also sends an email report to the web server administrator.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Dec-23
+# Date Updated: 2015-Dec-23
+# Version:      1.0
+
+##### CONSTANTS #####
+WEB_SERVER_ADMIN_EMAIL=admin@example.com
+NORMAL_SHUTDOWN_FILE='/etc/normal-shutdown'
+PROVISIONING_SHUTDOWN_FILE='/etc/provisioning-shutdown'
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Check the system shutdown status
+if [ $1 == 'stop' ]
+then
+    touch "$NORMAL_SHUTDOWN_FILE"
+elif [ $1 == 'start' ] 
+then 
+    # STEP 2: Check the system shutdown status
+    if [ ! -e "$NORMAL_SHUTDOWN_FILE" ]
+    then
+        echo 'ALERT - Power Failure Recovery on:' `date` `who` | mail -s "ALERT - Power Failure Recovery" $WEB_SERVER_ADMIN_EMAIL
+    elif [ ! -e "$PROVISIONING_SHUTDOWN_FILE" ]
+        echo 'NOTICE - Reboot after Server Provisioning on:' `date` `who` | mail -s "NOTICE - Reboot after Server Provisioning" $WEB_SERVER_ADMIN_EMAIL
+        rm "$PROVISIONING_SHUTDOWN_FILE"
+    else
+        echo 'NOTICE - Normal Server Reboot on:' `date` `who` | mail -s "NOTICE - Normal Server Reboot" $WEB_SERVER_ADMIN_EMAIL
+        rm "$NORMAL_SHUTDOWN_FILE"
+    fi
+fi
+
+##### END SCRIPT #####

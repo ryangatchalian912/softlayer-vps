@@ -12,6 +12,7 @@
 VPS_SCRIPTS_DIR=/usr/local/sbin
 SERVER_ADMIN_USERNAME=web_server_admin
 SERVER_ADMIN_EMAIL=admin@example.com
+PROVISIONING_SHUTDOWN_FILE='/etc/provisioning-shutdown'
 
 ##### BEGIN SCRIPT #####
 
@@ -100,7 +101,12 @@ cd $VPS_SCRIPTS_DIR
 network-tools-install
 echo ''
 
-# STEP 18: Update Linux kernel and reboot
+# STEP 18: Create the provisioning shutdown file (for reboot status detection)
+echo 'Creating the provisioning shutdown file (for reboot status detection)...'
+touch "$PROVISIONING_SHUTDOWN_FILE"
+echo ''
+
+# STEP 19: Update Linux kernel and reboot
 cd $VPS_SCRIPTS_DIR
 kernel-update
 echo ''
