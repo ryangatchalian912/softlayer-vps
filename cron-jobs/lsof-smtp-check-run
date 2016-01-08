@@ -13,7 +13,7 @@ WEB_SERVER_ADMIN_EMAIL=admin@example.com
 
 ##### BEGIN SCRIPT #####
 
-# STEP 1: Run ClamAV scanner (freshclam)
+# STEP 1: Run lsof port scanner
 ( lsof -i | grep smtp ) | mail -s 'SMTP Service Daily Scan Report' $WEB_SERVER_ADMIN_EMAIL
 
 ##### END SCRIPT #####

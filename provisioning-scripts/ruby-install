@@ -83,7 +83,7 @@ echo ''
 # STEP 5: Download and install Phusion Passenger for Rails
 echo 'Downloading and installing Phusion Passenger for Rails...'
 gem install passenger
-yum -y install libcurl-devel
+yum install -y libcurl-devel
 #passenger-install-apache2-module
 #passenger-install-apache2-module --apxs-path "/usr/bin/apxs"
 passenger-install-apache2-module --apxs-path $CPANEL_APACHE_APXS_PATH
@@ -91,7 +91,7 @@ echo ''
 
 # STEP 6: Download and install SQLite 3 for Rails
 echo 'Downloading and installing SQLite 3 for Rails...'
-yum -y install sqlite sqlite-devel
+yum install -y sqlite sqlite-devel
 gem install sqlite3
 echo ''
 

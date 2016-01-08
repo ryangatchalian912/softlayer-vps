@@ -10,7 +10,7 @@
 
 # STEP 1: Install telnet and telnet server
 echo 'Installing telnet and telnet server...'
-yum install telnet telnet-server -y
+yum install -y telnet telnet-server
 
 # STEP 2: Install netcat
 echo 'Installing netcat...'

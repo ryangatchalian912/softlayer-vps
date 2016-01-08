@@ -61,52 +61,57 @@ cd $VPS_SCRIPTS_DIR
 ruby-install
 echo ''
 
-# STEP 10: Install Composer for PHP
+# STEP 10: Install Ruby on Rails
+cd $VPS_SCRIPTS_DIR
+ruby-install
+echo ''
+
+# STEP 12: Install Composer for PHP
 cd $VPS_SCRIPTS_DIR
 composer-install
 echo ''
 
-# STEP 11: Install Meteor Platform
+# STEP 12: Install Meteor Platform
 cd $VPS_SCRIPTS_DIR
 meteor-install
 echo ''
 
-# STEP 12: Install Java 2 SE
+# STEP 13: Install Java 2 SE
 cd $VPS_SCRIPTS_DIR
 jdk-install
 echo ''
 
-# STEP 13: Install YUI Compressor
+# STEP 14: Install YUI Compressor
 cd $VPS_SCRIPTS_DIR
 yui-compressor-install
 echo ''
 
-# STEP 14: Perform server cleanup one last time
+# STEP 15: Perform server cleanup one last time
 cd $VPS_SCRIPTS_DIR
 vps-cleanup
 echo ''
 
-# STEP 15: Create custom system file filter
+# STEP 16: Create custom system file filter
 cd $VPS_SCRIPTS_DIR
 touch /etc/antivirus.empty
 echo ''
 
-# STEP 16: Install MaxMind Legacy GeoIP databases
+# STEP 17: Install MaxMind Legacy GeoIP databases
 cd $VPS_SCRIPTS_DIR
 geoip-database-download
 echo ''
 
-# STEP 17: Install network tools
+# STEP 18: Install network tools
 cd $VPS_SCRIPTS_DIR
 network-tools-install
 echo ''
 
-# STEP 18: Create the provisioning shutdown file (for reboot status detection)
+# STEP 19: Create the provisioning shutdown file (for reboot status detection)
 echo 'Creating the provisioning shutdown file (for reboot status detection)...'
 touch "$PROVISIONING_SHUTDOWN_FILE"
 echo ''
 
-# STEP 19: Update Linux kernel and reboot
+# STEP 20: Update Linux kernel and reboot
 cd $VPS_SCRIPTS_DIR
 kernel-update
 echo ''

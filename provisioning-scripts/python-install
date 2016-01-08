@@ -1,0 +1,30 @@
+#!/bin/bash
+# Title:        Ruby Install Script
+# Description:  This script installs Python for Linux servers.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jan-08
+# Date Updated: 2016-Jan-08
+# Version:      1.0
+
+##### CONSTANTS #####
+VPS_SCRIPTS_DIR=/usr/local/sbin
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Install Python
+echo 'Installing Python and python-pip...'
+yum install -y python python-pip
+
+# STEP 2: Install EPEL and other prerequisites
+echo 'Installing EPEL and other prerequisites...'
+yum install -y epel-release pygpgme curl
+
+# STEP 3: Update python-pip
+echo 'Updating python-pip...'
+pip install --upgrade pip
+
+# STEP 4: Install package dependencies
+echo 'Installing package dependencies...'
+pip install flask
+
+##### END SCRIPT #####

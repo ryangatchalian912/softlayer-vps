@@ -1,0 +1,19 @@
+#!/bin/bash
+# Title:        reboot Scheduled Run Script
+# Description:  This script reboots the server on a regular basis.
+#               It also sends an email report to the web server
+#               administrator.
+# Author:       Ryan Gatchalian
+# Date Created: 2015-Jan-07
+# Date Updated: 2015-Jan-07
+# Version:      1.0
+
+##### CONSTANTS #####
+WEB_SERVER_ADMIN_EMAIL=admin@example.com
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Reboot the server
+( reboot ) | mail -s 'Scheduled Server Reboot' $WEB_SERVER_ADMIN_EMAIL
+
+##### END SCRIPT #####
