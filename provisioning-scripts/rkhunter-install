@@ -7,8 +7,8 @@
 # Version:      1.0
 
 ##### CONSTANTS #####
-SRC_DOWNLOAD_DIR=/usr/local/src
 RKHUNTER_VERSION=1.4.2
+SRC_DOWNLOAD_DIR=/usr/local/src
 
 ##### BEGIN SCRIPT #####
 

@@ -9,9 +9,9 @@
 # Version:      1.0
 
 ##### CONSTANTS #####
-VPS_SCRIPTS_DIR=/usr/local/sbin
 SERVER_ADMIN_USERNAME=web_server_admin
 SERVER_ADMIN_EMAIL=admin@example.com
+VPS_SCRIPTS_DIR=/usr/local/sbin
 PROVISIONING_SHUTDOWN_FILE='/etc/provisioning-shutdown'
 
 ##### BEGIN SCRIPT #####

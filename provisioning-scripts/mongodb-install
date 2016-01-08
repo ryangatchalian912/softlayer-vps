@@ -1,0 +1,38 @@
+#!/bin/bash
+# Title:        MongoDB Local Install Script
+# Description:  This script installs the latest version of MongoDB server.
+# Author:       Ryan Gatchalian
+# Date Created: 2016-Jan-08
+# Date Updated: 2016-Jan-08
+# Version:      1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src
+BIN_DOWNLOAD_DIR=/usr/local/bin
+MONGODB_INSTALL_DIR=$BIN_DOWNLOAD_DIR/mongodb
+MONGODB_PACKAGE_VERSION=mongodb-linux-x86_64-rhel62-3.2.0
+MONGODB_PACKAGE_FILENAME=$MONGODB_PACKAGE_VERSION.tgz
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Download the binary files for the desired release of MongoDB
+echo 'Downloading the binary files for the desired release of MongoDB...'
+cd $SRC_DOWNLOAD_DIR
+curl -O https://fastdl.mongodb.org/linux/$MONGODB_PACKAGE_FILENAME
+echo "Finished downloading $MONGODB_PACKAGE_FILENAME to $SRC_DOWNLOAD_DIR."
+
+# STEP 2: Extract the files from the downloaded archive
+echo 'Extracting the files from the downloaded archive...'
+tar -zxvf $MONGODB_PACKAGE_FILENAME
+
+# STEP 3: Copy the extracted archive to the target directory
+echo 'Copying the extracted archive to the target directory...'
+mkdir -p $MONGODB_INSTALL_DIR
+cp -R -n $MONGODB_PACKAGE_VERSION/ $MONGODB_INSTALL_DIR
+echo "Done copying the extracted archive to the $MONGODB_INSTALL_DIR directory."
+
+# STEP 4: Ensure the location of the binaries is in the PATH variable
+echo 'Removing Clean Backups WHM Plugin installer files...'
+export PATH=$MONGODB_INSTALL_DIR/bin:$PATH
+
+##### END SCRIPT #####

@@ -8,8 +8,8 @@
 # Version:      1.0
 
 ##### CONSTANTS #####
-YUI_COMPRESSOR_VERSION=2.4.8
 USER_LIB_DIR=/usr/local/lib
+YUI_COMPRESSOR_VERSION=2.4.8
 YUI_COMPRESSOR_LIB_DIR=$USER_LIB_DIR/yuicompressor
 
 ##### FUNCTIONS #####
