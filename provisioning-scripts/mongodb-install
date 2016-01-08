@@ -32,7 +32,7 @@ cp -R -n $MONGODB_PACKAGE_VERSION/ $MONGODB_INSTALL_DIR
 echo "Done copying the extracted archive to the $MONGODB_INSTALL_DIR directory."
 
 # STEP 4: Ensure the location of the binaries is in the PATH variable
-echo 'Removing Clean Backups WHM Plugin installer files...'
-export PATH=$MONGODB_INSTALL_DIR/bin:$PATH
+echo 'Ensuring the location of the binaries is in the PATH variable...'
+export PATH=$MONGODB_INSTALL_DIR/$MONGODB_PACKAGE_VERSION/bin:$PATH
 
 ##### END SCRIPT #####
