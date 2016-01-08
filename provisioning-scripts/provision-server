@@ -5,7 +5,7 @@
 #               software and plugins.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Jun-16
-# Date Updated: 2015-Oct-29
+# Date Updated: 2016-Jan-08
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -61,9 +61,9 @@ cd $VPS_SCRIPTS_DIR
 ruby-install
 echo ''
 
-# STEP 10: Install Ruby on Rails
+# STEP 10: Install Python
 cd $VPS_SCRIPTS_DIR
-ruby-install
+python-install
 echo ''
 
 # STEP 12: Install Composer for PHP
