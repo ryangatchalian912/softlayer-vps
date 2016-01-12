@@ -56,24 +56,24 @@ cd $VPS_SCRIPTS_DIR
 vps-cleanup
 echo ''
 
-# STEP 9: Install Ruby on Rails
-cd $VPS_SCRIPTS_DIR
-ruby-install
-echo ''
-
-# STEP 10: Install Python
-cd $VPS_SCRIPTS_DIR
-python-install
-echo ''
-
-# STEP 12: Install Composer for PHP
+# STEP 9: Install Composer for PHP
 cd $VPS_SCRIPTS_DIR
 composer-install
 echo ''
 
-# STEP 12: Install Meteor Platform
+# STEP 10: Install Meteor Platform
 cd $VPS_SCRIPTS_DIR
 meteor-install
+echo ''
+
+# STEP 11: Install Python
+cd $VPS_SCRIPTS_DIR
+python-install
+echo ''
+
+# STEP 12: Install Ruby on Rails
+cd $VPS_SCRIPTS_DIR
+ruby-install
 echo ''
 
 # STEP 13: Install Java 2 SE

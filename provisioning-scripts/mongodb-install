@@ -3,7 +3,7 @@
 # Description:  This script installs the latest version of MongoDB server.
 # Author:       Ryan Gatchalian
 # Date Created: 2016-Jan-08
-# Date Updated: 2016-Jan-08
+# Date Updated: 2016-Jan-11
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -15,24 +15,49 @@ MONGODB_PACKAGE_FILENAME=$MONGODB_PACKAGE_VERSION.tgz
 
 ##### BEGIN SCRIPT #####
 
-# STEP 1: Download the binary files for the desired release of MongoDB
+# STEP 1: Remove old MongoDB sources
+cd $SRC_DOWNLOAD_DIR
+if [ -f "$MONGODB_PACKAGE_FILENAME" ]
+then
+    echo 'Removing old MongoDB sources...'
+    rm -rf mongodb*
+fi
+
+# STEP 2: Remove old MongoDB installations
+cd $SRC_DOWNLOAD_DIR
+if [ -d "$MONGODB_INSTALL_DIR" ]
+then
+    echo 'Removing old MongoDB installations...'
+    rm -rf $MONGODB_INSTALL_DIR
+fi
+
+# STEP 3: Download the binary files for the desired release of MongoDB
 echo 'Downloading the binary files for the desired release of MongoDB...'
 cd $SRC_DOWNLOAD_DIR
 curl -O https://fastdl.mongodb.org/linux/$MONGODB_PACKAGE_FILENAME
 echo "Finished downloading $MONGODB_PACKAGE_FILENAME to $SRC_DOWNLOAD_DIR."
 
-# STEP 2: Extract the files from the downloaded archive
+# STEP 4: Extract the files from the downloaded archive
 echo 'Extracting the files from the downloaded archive...'
 tar -zxvf $MONGODB_PACKAGE_FILENAME
 
-# STEP 3: Copy the extracted archive to the target directory
+# STEP 5: Copy the extracted archive to the target directory
 echo 'Copying the extracted archive to the target directory...'
 mkdir -p $MONGODB_INSTALL_DIR
-cp -R -n $MONGODB_PACKAGE_VERSION/ $MONGODB_INSTALL_DIR
+mv $MONGODB_PACKAGE_VERSION mongodb
+mv mongodb $BIN_DOWNLOAD_DIR
 echo "Done copying the extracted archive to the $MONGODB_INSTALL_DIR directory."
 
-# STEP 4: Ensure the location of the binaries is in the PATH variable
+# STEP 5: Ensure the location of the binaries is in the PATH variable
 echo 'Ensuring the location of the binaries is in the PATH variable...'
 export PATH=$MONGODB_INSTALL_DIR/$MONGODB_PACKAGE_VERSION/bin:$PATH
+
+# STEP 6: Remove old MongoDB sources
+cd $SRC_DOWNLOAD_DIR
+if [ -f "$MONGODB_PACKAGE_FILENAME" ]
+then
+    echo 'Removing old MongoDB sources...'
+    rm -rf mongodb*
+fi
 
 ##### END SCRIPT #####
