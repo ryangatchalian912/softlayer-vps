@@ -3,7 +3,7 @@
 # Description:  This script installs the latest version of Node.js.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-May-27
-# Date Updated: 2015-Sep-09
+# Date Updated: 2015-Jan-21
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -11,22 +11,32 @@ SRC_DOWNLOAD_DIR=/usr/local/src
 
 ##### BEGIN SCRIPT #####
 
-# STEP 1: Download Node.js
-echo 'Downloading the latest distribution of Node.js...'
+# STEP 1: Go to $SRC_DOWNLOAD_DIR
 cd $SRC_DOWNLOAD_DIR
-wget http://nodejs.org/dist/node-latest.tar.gz
 
-# STEP 2: Extract Node.js
-echo 'Extracting Node.js...'
-tar zxvf node-latest.tar.gz
+# STEP 2: Remove previous installations
+yum remove -y nodejs npm
 
-# STEP 3: Configure Node.js
-echo 'Configuring Node.js...'
-cd node-v*
-./configure
+# STEP 3: Update software repository to the latest versions
+yum update -y
 
-# STEP 4: Compile and install Node.js
-echo 'Compiling and installing Node.js...'
-make && make install
+# STEP 4: Install "Development Tools". It's a group of tools for compiling software from sources.
+yum groupinstall -y "Development Tools"
+
+# STEP 5: Install GNU screen (already installed on the server)
+yum install -y screen
+
+# STEP 6: Install EPEL 6 for RHEL, CentOS, or Fedora
+yum install -y epel-release curl
+
+# STEP 7: Install EPEL 6 latest RPM package for RHEL, CentOS, or Fedora
+rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
+
+# STEP 8: Run as root on RHEL, CentOS, or Fedora:
+curl --fail -sSL -o setup-nodejs --silent --location https://rpm.nodesource.com/setup_5.x | bash -
+
+# STEP 9: Then install, as root:
+#yum install -y nodejs npm --enablerepo=epel
+yum install -y nodejs npm
 
 ##### END SCRIPT #####
