@@ -5,7 +5,7 @@
 #               the Ruby versions before 1.9 do not support Rails 4.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-May-27
-# Date Updated: 2016-Jan-08
+# Date Updated: 2016-Feb-10
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -22,17 +22,8 @@ CPANEL_APACHE_APXS_PATH=/usr/local/apache/bin/apxs
 ##### BEGIN SCRIPT #####
 
 # STEP 1: Remove previous Ruby installations
-if [ -d "$SRC_DOWNLOAD_DIR" ]
-then
-    echo "Removing $SRC_DOWNLOAD_DIR directory..."
-    rm -rf $SRC_DOWNLOAD_DIR
-fi
-
-if [ -d "$LIB_DOWNLOAD_DIR" ]
-then
-    echo "Removing $LIB_DOWNLOAD_DIR directory..."
-    rm -rf $LIB_DOWNLOAD_DIR
-fi
+cd $VPS_SCRIPTS_DIR
+ruby-uninstall
 
 # STEP 2: Download and install Ruby
 if [ ! -d "$SRC_DOWNLOAD_DIR" ]

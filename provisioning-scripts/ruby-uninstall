@@ -1,0 +1,60 @@
+#!/bin/bash
+# Title:        Ruby Uninstall Script
+# Description:  This script uninstalls the latest Ruby on Rails for Linux servers.
+# Author:       Ryan Gatchalian
+# Date Created: 2016-Feb-10
+# Date Updated: 2016-Feb-10
+# Version:      1.0
+
+##### CONSTANTS #####
+SRC_DOWNLOAD_DIR=/usr/local/src/ruby
+LIB_DOWNLOAD_DIR=/usr/local/lib/ruby
+BIN_DOWNLOAD_DIR=/usr/local/bin/ruby
+VPS_SCRIPTS_DIR=/usr/local/sbin
+
+##### BEGIN SCRIPT #####
+
+# STEP 1: Remove previous Ruby installations
+if [ -d "$SRC_DOWNLOAD_DIR" ]
+then
+    echo "Removing $SRC_DOWNLOAD_DIR directory..."
+    rm -rf $SRC_DOWNLOAD_DIR
+fi
+
+if [ -d "$LIB_DOWNLOAD_DIR" ]
+then
+    echo "Removing $LIB_DOWNLOAD_DIR directory..."
+    rm -rf $LIB_DOWNLOAD_DIR
+fi
+
+if [ -d "$BIN_DOWNLOAD_DIR" ]
+then
+    echo "Removing $BIN_DOWNLOAD_DIR directory..."
+    rm -rf $BIN_DOWNLOAD_DIR
+fi
+
+if [ -L '/usr/bin/ruby' ]
+then
+    echo "Removing symlink for /usr/bin/ruby..."
+    rm -f /usr/bin/ruby
+fi
+
+if [ -L '/usr/lib/ruby' ]
+then
+    echo "Removing symlink for /usr/lib/ruby..."
+    rm -f /usr/lib/ruby
+fi
+
+if [ -L '/usr/bin/gem' ]
+then
+    echo "Removing symlink for /usr/bin/gem..."
+    rm -f /usr/bin/gem
+fi
+
+if [ -L '/usr/bin/rails' ]
+then
+    echo "Removing symlink for /usr/bin/rails..."
+    rm -f /usr/bin/rails
+fi
+
+##### END SCRIPT #####
