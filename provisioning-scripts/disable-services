@@ -4,7 +4,7 @@
 #               ConfigServer Firewall (CSF).
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Jun-15
-# Date Updated: 2015-Sep-09
+# Date Updated: 2016-Feb-26
 # Version:      1.0
 
 ##### BEGIN SCRIPT #####
@@ -23,5 +23,10 @@ chkconfig portreserve off
 echo 'Disabling rpcbind service...'
 service rpcbind stop
 chkconfig rpcbind off
+
+# STEP 4: Disable xinetd service
+echo 'Disabling xinetd service...'
+service xinetd stop
+chkconfig xinetd off
 
 ##### END SCRIPT #####
