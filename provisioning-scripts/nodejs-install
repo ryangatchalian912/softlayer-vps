@@ -3,7 +3,7 @@
 # Description:  This script installs the latest version of Node.js.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-May-27
-# Date Updated: 2015-Jan-21
+# Date Updated: 2015-Mar-29
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -33,10 +33,15 @@ yum install -y epel-release curl
 rpm -ivh https://dl.fedoraproject.org/pub/epel/epel-release-latest-6.noarch.rpm
 
 # STEP 8: Run as root on RHEL, CentOS, or Fedora:
-curl --fail -sSL -o setup-nodejs --silent --location https://rpm.nodesource.com/setup_5.x | bash -
+#curl --fail -sSL -o setup-nodejs --silent --location https://rpm.nodesource.com/setup_5.x | bash -
+
+# STEP 8: Download Node v0.10 for compatibility with Meteor Framework
+curl --fail -sSL -o setup-nodejs --silent --location https://rpm.nodesource.com/setup_0.10
 
 # STEP 9: Then install, as root:
 #yum install -y nodejs npm --enablerepo=epel
-yum install -y nodejs npm
+#yum install -y nodejs npm
+bash setup-nodejs
+yum install -y nodejs gcc-c++ make
 
 ##### END SCRIPT #####

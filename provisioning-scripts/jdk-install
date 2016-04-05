@@ -3,14 +3,14 @@
 # Description:  This script installs the latest version of Java 2 SE.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Jun-16
-# Date Updated: 2015-Feb-10
+# Date Updated: 2015-Mar-29
 # Version:      1.0
 
 ##### CONSTANTS #####
 JDK_MAJOR_VERSION=8
-JDK_MINOR_VERSION=74
+JDK_MINOR_VERSION=77
 JDK_VERSION=$JDK_MAJOR_VERSION'u'$JDK_MINOR_VERSION
-JDK_BUILD=02
+JDK_BUILD=03
 SRC_DOWNLOAD_DIR=/usr/local/src/java
 
 ##### BEGIN SCRIPT #####
