@@ -1,0 +1,24 @@
+#!/bin/bash
+# Title:        Google Closure Compiler Uninstall Script
+# Description:  This script uninstalls all existing Google Closure Compiler installations.
+# Author:       Ryan Gatchalian
+# Date Created: 2016-Apr-07
+# Date Updated: 2016-Apr-07
+# Version:      1.0
+
+##### CONSTANTS #####
+USER_LIB_DIR=/usr/local/lib
+
+##### BEGIN SCRIPT #####
+
+if [ -d "$USER_LIB_DIR" ]
+then
+    # Control will enter here if $USER_LIB_DIR exists
+    echo "Directory $USER_LIB_DIR already exists."
+
+    # STEP 1: Remove all existing Google Closure Compiler installations
+    echo 'Removing all existing Google Closure Compiler installations...'
+    rm -rf $USER_LIB_DIR/closure-compiler*
+fi
+
+##### END SCRIPT #####

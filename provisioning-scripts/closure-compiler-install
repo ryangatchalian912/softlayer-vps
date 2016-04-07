@@ -1,0 +1,64 @@
+#!/bin/bash
+# Title:        Google Closure Compiler Download Script
+# Description:  This script downloads the latest version of the Google Closure Compiler
+#               from the official GitHub repository.
+# Author:       Ryan Gatchalian
+# Date Created: 2016-Apr-07
+# Date Updated: 2016-Apr-07
+# Version:      1.0
+
+##### CONSTANTS #####
+USER_LIB_DIR=/usr/local/lib
+CLOSURE_COMPILER_LIB_DIR=$USER_LIB_DIR/closure-compiler
+
+##### FUNCTIONS #####
+download_closure_compiler()
+{
+    # STEP 1: Go into the $CLOSURE_COMPILER_LIB_DIR directory
+    echo "Going into the $CLOSURE_COMPILER_LIB_DIR directory..."
+    cd $CLOSURE_COMPILER_LIB_DIR
+
+    # STEP 2: Download Google Closure Compiler
+    echo 'Downloading Google Closure Compiler...'
+    wget https://dl.google.com/closure-compiler/compiler-latest.zip
+
+    # STEP 3: Extract Google Closure Compiler files
+    echo 'Extracting Google Closure Compiler files...'
+    unzip compiler-latest.zip
+
+    # STEP 4: Remove Google Closure Compiler archive
+    echo 'Removing Google Closure Compiler archive...'
+    rm -f compiler-latest.zip
+}
+
+##### BEGIN SCRIPT #####
+
+if [ -d "$USER_LIB_DIR" ]
+then
+    # Control will enter here if $USER_LIB_DIR exists
+    echo "Directory $USER_LIB_DIR already exists."
+
+    # STEP 1: Remove previous versions of Google Closure Compiler
+    echo 'Removing previous versions of Google Closure Compiler...'
+    rm -rf $USER_LIB_DIR/closure-compiler*
+
+    # STEP 2: Create $CLOSURE_COMPILER_LIB_DIR directory
+    echo "Creating $CLOSURE_COMPILER_LIB_DIR directory..."
+    mkdir $CLOSURE_COMPILER_LIB_DIR
+
+    # STEP 3: Download Google Closure Compiler
+    download_closure_compiler
+else
+    # STEP 1: Create $USER_LIB_DIR directory
+    echo "Creating $USER_LIB_DIR directory..."
+    mkdir $USER_LIB_DIR
+
+    # STEP 2: Create $CLOSURE_COMPILER_LIB_DIR directory
+    echo "Creating $CLOSURE_COMPILER_LIB_DIR directory..."
+    mkdir $CLOSURE_COMPILER_LIB_DIR
+
+    # STEP 3: Download Google Closure Compiler
+    download_closure_compiler
+fi
+
+##### END SCRIPT #####

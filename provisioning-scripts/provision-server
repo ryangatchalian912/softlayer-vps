@@ -5,7 +5,7 @@
 #               software and plugins.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Jun-16
-# Date Updated: 2016-Jan-21
+# Date Updated: 2016-Apr-07
 # Version:      1.0
 
 ##### CONSTANTS #####
@@ -91,32 +91,37 @@ cd $VPS_SCRIPTS_DIR
 yui-compressor-install
 echo ''
 
-# STEP 16: Create custom system file filter
+# STEP 16: Install Google Closure Compiler
+cd $VPS_SCRIPTS_DIR
+closure-compiler-install
+echo ''
+
+# STEP 17: Create custom system file filter
 cd $VPS_SCRIPTS_DIR
 touch /etc/antivirus.empty
 echo ''
 
-# STEP 17: Install MaxMind Legacy GeoIP databases
+# STEP 18: Install MaxMind Legacy GeoIP databases
 cd $VPS_SCRIPTS_DIR
 geoip-database-download
 echo ''
 
-# STEP 18: Install network tools
+# STEP 19: Install network tools
 cd $VPS_SCRIPTS_DIR
 network-tools-install
 echo ''
 
-# STEP 19: Perform server cleanup one last time
+# STEP 20: Perform server cleanup one last time
 cd $VPS_SCRIPTS_DIR
 vps-cleanup
 echo ''
 
-# STEP 20: Create the provisioning shutdown file (for reboot status detection)
+# STEP 21: Create the provisioning shutdown file (for reboot status detection)
 echo 'Creating the provisioning shutdown file (for reboot status detection)...'
 touch "$PROVISIONING_SHUTDOWN_FILE"
 echo ''
 
-# STEP 21: Update Linux kernel and reboot
+# STEP 22: Update Linux kernel and reboot
 cd $VPS_SCRIPTS_DIR
 kernel-update
 echo ''
