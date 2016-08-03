@@ -5,12 +5,12 @@
 #               the Ruby versions before 1.9 do not support Rails 4.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-May-27
-# Date Updated: 2016-Jul-14
+# Date Updated: 2016-Aug-04
 # Version:      1.0
 
 ##### CONSTANTS #####
 RUBY_MAJOR_VERSION=2.3
-RUBY_MINOR_VERSION=0
+RUBY_MINOR_VERSION=1
 RUBY_VERSION=$RUBY_MAJOR_VERSION.$RUBY_MINOR_VERSION
 RUBYGEMS_VERSION=2.6.6
 SRC_DOWNLOAD_DIR=/usr/local/src/ruby
