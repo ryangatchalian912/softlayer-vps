@@ -3,14 +3,14 @@
 # Description:  This script installs the latest version of MongoDB server.
 # Author:       Ryan Gatchalian
 # Date Created: 2016-Jan-08
-# Date Updated: 2016-Nov-25
+# Date Updated: 2016-Dec-08
 # Version:      1.0
 
 ##### CONSTANTS #####
 SRC_DOWNLOAD_DIR=/usr/local/src
 BIN_DOWNLOAD_DIR=/usr/local/bin
 MONGODB_INSTALL_DIR=$BIN_DOWNLOAD_DIR/mongodb
-MONGODB_PACKAGE_VERSION=mongodb-linux-x86_64-rhel62-3.2.11
+MONGODB_PACKAGE_VERSION=mongodb-linux-x86_64-rhel62-3.4.0
 MONGODB_PACKAGE_FILENAME=$MONGODB_PACKAGE_VERSION.tgz
 
 ##### BEGIN SCRIPT #####
