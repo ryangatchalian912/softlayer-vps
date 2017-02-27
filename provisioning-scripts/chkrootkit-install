@@ -3,13 +3,13 @@
 # Description:  This script installs the latest version of chkrootkit.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Jun-09
-# Date Updated: 2015-Sep-09
+# Date Updated: 2017-Feb-27
 # Version:      1.0
 
 ##### CONSTANTS #####
 SRC_DOWNLOAD_DIR=/usr/local/src
 BIN_DOWNLOAD_DIR=/usr/local/bin
-CHKROOTKIT_VERSION=0.50
+CHKROOTKIT_VERSION=0.51
 CHKROOTKIT_SRC_DIR=$SRC_DOWNLOAD_DIR/chkrootkit-$CHKROOTKIT_VERSION
 
 ##### BEGIN SCRIPT #####
