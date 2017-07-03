@@ -3,11 +3,11 @@
 # Description:  This script installs the latest version of Rootkit Hunter.
 # Author:       Ryan Gatchalian
 # Date Created: 2015-Jun-16
-# Date Updated: 2015-Sep-09
+# Date Updated: 2017-Jul-04
 # Version:      1.0
 
 ##### CONSTANTS #####
-RKHUNTER_VERSION=1.4.2
+RKHUNTER_VERSION=1.4.4
 SRC_DOWNLOAD_DIR=/usr/local/src
 
 ##### BEGIN SCRIPT #####
